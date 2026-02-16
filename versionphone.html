@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace Professeurs</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  margin:0;
+  background:#0a9a84;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+/* Logo en haut à droite */
+.logo{
+  position:fixed;
+  top:15px;
+  right:20px;
+}
+
+.logo img{
+  height:40px;
+}
+
+/* Container principal */
+.container{
+  width:100%;
+  max-width:400px;
+}
+
+.login-box{
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  text-align:center;
+}
+
+.radio{
+  display:flex;
+  justify-content:space-around;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  background:#1e88e5;
+  color:white;
+  cursor:pointer;
+}
+
+button:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔗 Remplace le lien ici -->
+<a href="img.png" class="logo" target="_blank">
+  <!-- 🔗 Remplace l'URL de l'image ici -->
+  <img src="img.png" alt="Logo">
+</a>
+
+<div class="container">
+  <div class="login-box">
+    <h3>Espace Professeurs</h3>
+
+    <div class="radio">
+      <label><input type="radio" name="lieu" checked> Domicile</label>
+      <label><input type="radio" name="lieu"> Dans la classe</label>
+    </div>
+
+    <input id="user" type="text" placeholder="Identifiant">
+    <input id="pass" type="password" placeholder="Mot de passe">
+
+    <button id="btn" disabled>Se connecter</button>
+  </div>
+</div>
+
+<script>
+const user = document.getElementById("user");
+const pass = document.getElementById("pass");
+const btn  = document.getElementById("btn");
+
+function check(){
+  btn.disabled = !(user.value.trim() && pass.value.trim());
+}
+
+user.addEventListener("input", check);
+pass.addEventListener("input", check);
+
+btn.addEventListener("click", () => {
+  alert("Connexion simulée");
+});
+</script>
+
+</body>
+</html>
